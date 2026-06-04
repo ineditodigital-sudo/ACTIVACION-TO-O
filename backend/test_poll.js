@@ -1,0 +1,2 @@
+require('dotenv').config();
+const axios = require('axios'); const prompt = "3D animated Pixar style portrait of a happy child. The person is wearing a highly detailed chef uniform."; const encoded = encodeURIComponent(prompt); // This is like rawurlencode in PHP const pollUrl = `https://image.pollinations.ai/prompt/${encoded}?width=1080&height=1920&nologo=true`; axios.get(pollUrl).then(res => console.log(res.status)).catch(err => console.log(err.response.data));

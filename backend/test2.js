@@ -1,0 +1,2 @@
+require('dotenv').config();
+const { GoogleGenerativeAI } = require("@google/generative-ai"); const GEMINI_API_KEY = process.env.GEMINI_API_KEY; const genAI = new GoogleGenerativeAI(GEMINI_API_KEY);  async function run() {   const model = genAI.getGenerativeModel({ model: "gemini-2.0-flash-exp" });   try {     const result = await model.generateContent("Genera una foto de un panda rojo con sombrero de chef.");     console.log(JSON.stringify(result.response, null, 2));   } catch (e) {     console.error(e);   } } run();

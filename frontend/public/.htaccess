@@ -1,0 +1,52 @@
+# Desactivar listado de directorios
+Options -Indexes
+
+# Prevenir cache de index.html para asegurar actualizaciones de UI
+<FilesMatch "\.(html)$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-cache, no-store, must-revalidate"
+        Header set Pragma "no-cache"
+        Header set Expires 0
+    </IfModule>
+</FilesMatch>
+
+# CRÍTICO: Nunca cachear PHP - Cloudflare ignoraría los query params de lo contrario
+<FilesMatch "\.php$">
+    <IfModule mod_headers.c>
+        Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"
+        Header set Pragma "no-cache"
+        Header set Expires "-1"
+        Header unset ETag
+    </IfModule>
+</FilesMatch>
+
+# Cabeceras CORS para imágenes generadas
+<FilesMatch "\.(jpg|jpeg|png|gif|webp)$">
+    <IfModule mod_headers.c>
+        Header set Access-Control-Allow-Origin "*"
+    </IfModule>
+</FilesMatch>
+
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  # La app vive en la raiz del subdominio activacion.grupoalaman.com
+  RewriteBase /
+
+  # Redirigir /admin al panel de React moderno
+  RewriteRule ^admin$ /?admin [R,L]
+
+  # REGLA CRÍTICA: Dejar pasar TODOS los archivos y carpetas que existan físicamente
+  # Esto incluye outputs/, assets/, *.php, *.png, *.jpg, etc.
+  RewriteCond %{REQUEST_FILENAME} -f [OR]
+  RewriteCond %{REQUEST_FILENAME} -d
+  RewriteRule ^ - [L]
+
+  # Solo redirigir a React rutas que NO existen en disco
+  RewriteRule ^ index.html [L]
+</IfModule>
+
+# Intentar desactivar ModSecurity
+<IfModule mod_security.c>
+  SecFilterEngine Off
+  SecFilterScanPOST Off
+</IfModule>

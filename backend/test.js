@@ -1,0 +1,2 @@
+require('dotenv').config();
+const axios = require('axios'); const GEMINI_API_KEY = process.env.GEMINI_API_KEY; axios.post(`https://generativelanguage.googleapis.com/v1beta/models/imagen-3.0-generate-001:predict?key=${GEMINI_API_KEY}`, {     instances: [{ prompt: "A red panda in a chef hat" }],     parameters: { sampleCount: 1 } }).then(r => console.log("SUCCESS length:", r.data.predictions[0].bytesBase64.length))     .catch(e => console.log("ERROR:", JSON.stringify(e.response.data)));

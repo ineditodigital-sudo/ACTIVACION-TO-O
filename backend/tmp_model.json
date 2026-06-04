@@ -1,0 +1,7 @@
+{
+  "error": {
+    "code": 404,
+    "message": "Model is not found: models/gemini-2.5-pro-image for api version v1beta",
+    "status": "NOT_FOUND"
+  }
+}
