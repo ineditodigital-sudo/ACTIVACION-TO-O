@@ -311,7 +311,7 @@ if ($action === 'view_photo') {
     echo '<div class="photo-wrap"><img src="data:image/jpeg;base64,' . $imgB64Encoded . '" class="photo" alt="Tu Foto"></div>';
     echo '<h1>¡TU FOTO LISTA!</h1>';
     echo '<p>Guarda este recuerdo de tu encuentro con Toño Martín del Campo.</p>';
-    echo '<a href="' . $dlUrl . '" class="btn" download="MiFotoConTono.jpg" target="_blank">';
+    echo '<a href="outputs/' . $filename . '" class="btn" download="MiFotoConTono.jpg" target="_blank">';
     echo '<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path><polyline points="7 10 12 15 17 10"></polyline><line x1="12" y1="15" x2="12" y2="3"></line></svg>';
     echo 'DESCARGAR FOTO</a>';
     echo '<button class="btn-share" onclick="sharePhoto()">';
@@ -1051,7 +1051,7 @@ if ($action === 'download_image') {
             echo '<div class="photo-frame"><img src="' . $imgDataUrl . '" alt="Tu Foto"></div>';
             echo '<h1>¡TU FOTO LISTA!</h1>';
             echo '<p>Guarda este recuerdo de tu encuentro con Toño Martín del Campo.</p>';
-            echo '<a href="?action=download_image&id=' . urlencode($filename) . '&force=1" class="btn" download="MiFotoConTono.jpg" target="_blank">DESCARGAR FOTO</a>';
+            echo '<a href="outputs/' . urlencode($filename) . '" class="btn" download="MiFotoConTono.jpg" target="_blank">DESCARGAR FOTO</a>';
             echo '</div></body></html>';
         } else {
             // Descarga directa para apps/HTTP clients sin browser
