@@ -705,7 +705,7 @@ if (isset($input['p']) || $action === 'process') {
         $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair is solid black. HE MUST NEVER HAVE TATTOOS. DO NOT transfer tattoos from IMAGE 1 to Toño.\n\n";
     }
     
-    $finalPrompt .= "=== OUTFIT ===\n";
+    $finalPrompt .= "=== GROUP DYNAMICS ===\n";
     if ($gender === 'group') {
         $finalPrompt .=
             "7. GROUP ANTI-FUSION: Each person is a COMPLETELY SEPARATE individual. Do NOT blend, merge, or average facial features between people. Each face is UNIQUE.\n"
@@ -729,9 +729,15 @@ if (isset($input['p']) || $action === 'process') {
 
     $finalPrompt .=
         "=== OUTFIT ===\n"
-        . "{$outfitInstruction} {$outfitDesc}.\n\n"
+        . "{$outfitInstruction} {$outfitDesc}.\n";
 
-        . "=== POSING & INTERACTION ===\n";
+    if ($category !== 'futbol') {
+        $finalPrompt .= "CRITICAL OUTFIT RULE FOR TOÑO: Toño Martín del Campo MUST wear formal executive attire. Specifically, a dark blue suit jacket (saco azul oscuro) and a light blue shirt (camisa azul claro), or just a light blue shirt without the jacket. ABSOLUTELY NO GUAYABERAS. Do NOT generate guayaberas or casual white shirts for Toño.\n\n";
+    } else {
+        $finalPrompt .= "\n";
+    }
+
+    $finalPrompt .= "=== POSING & INTERACTION ===\n";
     
     if ($category === 'futbol') {
         $finalPrompt .= "- All characters (people from IMAGE 1, Toño from IMAGE 2, Kikín from IMAGE 3) are in a commentator cabin, celebrating, gesturing dynamically and narrating the match.\n"
