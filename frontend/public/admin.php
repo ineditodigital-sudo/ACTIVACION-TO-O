@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 /**
  * ACTIVACIÓN TOÑO MARTÍN DEL CAMPO - NANO BANANA 3.1
  * Lógica de 2 Etapas: Visión (Gemini 1.5 Flash) + Generación (Gemini 2.5 Flash Image)
@@ -231,8 +231,10 @@ if ($action === 'save_qr_token') {
     $token    = bin2hex(random_bytes(8));
     $filename = 'qr_' . $token . '.jpg';
     $filepath = $outputDir . '/' . $filename;
-    $bytes    = base64_decode($imgB64);
+    // Limpiar posible prefijo data:image/...
+    $cleanB64 = (strpos($imgB64, ',') !== false) ? explode(',', $imgB64)[1] : $imgB64;
 
+    $bytes    = base64_decode($cleanB64);
     if ($bytes && file_put_contents($filepath, $bytes) !== false) {
         @chmod($filepath, 0644);
         ob_end_clean();
