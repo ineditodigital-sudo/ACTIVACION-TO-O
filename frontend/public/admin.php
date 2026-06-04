@@ -808,6 +808,13 @@ if (isset($input['p']) || $action === 'process') {
     if ($candidatePhotoBase64) {
         $parts[] = ['text' => "[IMAGE 2 - Toño Martín del Campo]:\nCRITICAL IDENTITY RULE: This is the exact reference photo of Toño Martín del Campo. You MUST extract his exact facial identity and CLONE IT pixel-by-pixel onto his character. You MUST replicate his exact eye shape, nose shape, and signature mustache. If you generate a generic man with a mustache instead of THIS EXACT PERSON, the generation is a catastrophic failure."];
         $parts[] = ['inline_data' => ['mime_type' => 'image/jpeg', 'data' => $candidatePhotoBase64]];
+
+        $tonoFacePath = __DIR__ . '/martin-del-campo-face.jpg';
+        if (file_exists($tonoFacePath)) {
+            $tonoFaceBase64 = base64_encode(file_get_contents($tonoFacePath));
+            $parts[] = ['text' => "[IMAGE 2 FACE DETAIL - TOÑO CLOSEUP]: This is a high-resolution closeup of Toño's exact face. Study his facial geometry, eyes, and mustache carefully. DO NOT INVENT A NEW FACE. CLONE THIS EXACT FACE WITH 100% ACCURACY."];
+            $parts[] = ['inline_data' => ['mime_type' => 'image/jpeg', 'data' => $tonoFaceBase64]];
+        }
     }
 
     if ($category === 'futbol' && $kikinPhotoBase64) {
