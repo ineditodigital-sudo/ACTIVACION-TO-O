@@ -788,9 +788,9 @@ if (isset($input['p']) || $action === 'process') {
             $pId = $cropItem['pId'] ?? 1;
             
             if ($gender === 'group') {
-                $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - PERSON {$pId} {$desc}]: This is the face of CHARACTER {$pId} from the group. Clone this face exactly for CHARACTER {$pId}. Do not apply this face to anyone else."];
+                $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - PERSON {$pId} {$desc}]: This is the exact face of CHARACTER {$pId} from the group. CLONE THIS FACE WITH 100% ACCURACY for CHARACTER {$pId}. Do not beautify or alter any facial features. Keep their exact age, skin texture, and geometry. Do not apply this face to anyone else."];
             } else {
-                $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - {$desc}]: This is the face of the FIRST person. It is the ABSOLUTE HIGHEST PRIORITY of this generation to clone this face exactly. Do not alter the facial features."];
+                $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - {$desc}]: This is the face of the FIRST person (User). CLONE THIS FACE WITH 100% ACCURACY. Do not beautify, smooth, or alter ANY facial features. Keep their exact age, skin texture, nose shape, and eye shape. THIS IS THE ABSOLUTE HIGHEST PRIORITY."];
             }
             
             $parts[] = ['inline_data' => ['mime_type' => 'image/jpeg', 'data' => $data]];
@@ -798,7 +798,7 @@ if (isset($input['p']) || $action === 'process') {
     }
 
     if ($candidatePhotoBase64) {
-        $parts[] = ['text' => "[IMAGE 2 - Second Person (Toño Martín del Campo)]:\nThis is the reference photo of Toño Martín del Campo. Make him look exactly like this."];
+        $parts[] = ['text' => "[IMAGE 2 - Second Person (Toño Martín del Campo)]:\nThis is the reference photo of Toño Martín del Campo. You MUST extract his face from this image and CLONE IT EXACTLY onto his character in the final generation. Do not beautify or synthesize his face. The identity must be 100% identical to this image. If his face doesn't match perfectly, the generation is a complete failure."];
         $parts[] = ['inline_data' => ['mime_type' => 'image/jpeg', 'data' => $candidatePhotoBase64]];
     }
 
