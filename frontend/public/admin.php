@@ -676,12 +676,12 @@ if (isset($input['p']) || $action === 'process') {
         if ($gender === 'group') {
             $finalPrompt .= "Take EXACTLY {$numPeopleText} people from IMAGE 1, the person from IMAGE 2 (Toño Martín del Campo), and the person from IMAGE 3 (Kikín Fonseca). Put them interacting organically together as a team of commentators in a broadcast cabin for a soccer match.\n"
                 . "CRITICAL RULE: You MUST generate EXACTLY " . ($numPeople + 2) . " main characters in the foreground. DO NOT GENERATE ANY EXTRA MAIN CHARACTERS.\n"
-                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) MUST ALWAYS BE PRESENT and clearly visible in the center of the action. If Toño is missing, the generation is a complete failure.\n"
+                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) and the person from IMAGE 3 (Kikín Fonseca) MUST BOTH ALWAYS BE PRESENT and clearly visible in the center of the action. If either Toño or Kikín is missing, the generation is a complete failure.\n"
                 . "CRITICAL RULE: IMAGE 1 contains multiple different people. You must include ALL of them as separate individuals. Do not merge or fuse them. Maintain character consistency for everyone (User group, Toño, and Kikín).\n";
         } else {
             $finalPrompt .= "Take the person from IMAGE 1, the person from IMAGE 2 (Toño Martín del Campo), and the person from IMAGE 3 (Kikín Fonseca). Put them interacting organically together as a team of commentators in a broadcast cabin for a soccer match.\n"
                 . "CRITICAL RULE: You MUST generate EXACTLY THREE (3) distinct, separate people. DO NOT merge, fuse, or combine characters. Each person must have their own separate body.\n"
-                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) MUST ALWAYS BE PRESENT and clearly visible. If Toño is missing, the generation is a complete failure.\n"
+                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) and the person from IMAGE 3 (Kikín Fonseca) MUST BOTH ALWAYS BE PRESENT and clearly visible. If either Toño or Kikín is missing, the generation is a complete failure.\n"
                 . "CRITICAL RULE: Maintain ABSOLUTE EXTREME 1:1 PHOTOREALISTIC character consistency for all three people. Your ONLY job is to copy and paste the EXACT faces from the reference images onto the bodies. Do NOT beautify, alter, or synthesize the faces. The identity must match 100%.\n";
         }
     } else {
@@ -803,7 +803,7 @@ if (isset($input['p']) || $action === 'process') {
     }
 
     if ($category === 'futbol' && $kikinPhotoBase64) {
-        $parts[] = ['text' => "[IMAGE 3 - Third Person (Kikín Fonseca)]:\nThis is the reference photo of Kikín Fonseca. Make him look exactly like this."];
+        $parts[] = ['text' => "[IMAGE 3 - Third Person (Kikín Fonseca)]:\nThis is the reference photo of Kikín Fonseca. You MUST extract his face from this image and CLONE IT EXACTLY onto his character in the final generation. Do not beautify or synthesize his face. The identity must be 100% identical to this image. If his face doesn't match perfectly, the generation is a complete failure."];
         $parts[] = ['inline_data' => ['mime_type' => 'image/png', 'data' => $kikinPhotoBase64]];
     }
 
