@@ -701,10 +701,10 @@ if (isset($input['p']) || $action === 'process') {
     $finalPrompt .= "Integrate their bodies, lighting, and shadows perfectly so it looks like an unedited raw photo from a standard digital camera. No collage effect.\n\n"
         . "=== CHARACTER SPECIFIC RULES ===\n";
     if ($category === 'futbol') {
-        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair MUST be solid black. He must NEVER have white, gray, or brown hair. HE MUST NEVER HAVE TATTOOS. He has a mustache. You MUST replicate his signature mustache exactly as shown in the reference image. DO NOT transfer tattoos from IMAGE 1 to Toño.\n"
-            . "- Kikín Fonseca (from IMAGE 3): Replicate his facial features and hair exactly. He has a very light stubble or is clean-shaven. He must NEVER have a thick, bushy, or frondose beard.\n\n";
+        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): THIS IS A STRICT FACE SWAP. Extract his face from IMAGE 2 and CLONE IT EXACTLY. His facial structure, eyes, and signature mustache must be a 1:1 match. Do NOT generate a generic man with a mustache. His hair MUST be solid black. HE MUST NEVER HAVE TATTOOS. DO NOT transfer tattoos from IMAGE 1 to Toño. Failure to replicate his exact identity is a catastrophic failure.\n"
+            . "- Kikín Fonseca (from IMAGE 3): THIS IS A STRICT FACE SWAP. Extract his face from IMAGE 3 and CLONE IT EXACTLY. He has a very light stubble or is clean-shaven. He must NEVER have a thick, bushy, or frondose beard. Failure to replicate his identity is a catastrophic failure.\n\n";
     } else {
-        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair is solid black. HE MUST NEVER HAVE TATTOOS. He has a mustache. You MUST replicate his signature mustache exactly as shown in the reference image. DO NOT transfer tattoos from IMAGE 1 to Toño.\n\n";
+        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): THIS IS A STRICT FACE SWAP. Extract his face from IMAGE 2 and CLONE IT EXACTLY. His facial structure, eyes, and signature mustache must be a 1:1 match. Do NOT generate a generic man with a mustache. His hair is solid black. HE MUST NEVER HAVE TATTOOS. DO NOT transfer tattoos from IMAGE 1 to Toño. Failure to replicate his exact identity is a catastrophic failure.\n\n";
     }
     
     $finalPrompt .= "=== GROUP DYNAMICS ===\n";
@@ -806,12 +806,12 @@ if (isset($input['p']) || $action === 'process') {
     }
 
     if ($candidatePhotoBase64) {
-        $parts[] = ['text' => "[IMAGE 2 - Second Person (Toño Martín del Campo)]:\nThis is the reference photo of Toño Martín del Campo. You MUST extract his face from this image and CLONE IT EXACTLY onto his character in the final generation. Do not beautify or synthesize his face. The identity must be 100% identical to this image. If his face doesn't match perfectly, the generation is a complete failure."];
+        $parts[] = ['text' => "[IMAGE 2 - Toño Martín del Campo]:\nCRITICAL IDENTITY RULE: This is the exact reference photo of Toño Martín del Campo. You MUST extract his exact facial identity and CLONE IT pixel-by-pixel onto his character. You MUST replicate his exact eye shape, nose shape, and signature mustache. If you generate a generic man with a mustache instead of THIS EXACT PERSON, the generation is a catastrophic failure."];
         $parts[] = ['inline_data' => ['mime_type' => 'image/jpeg', 'data' => $candidatePhotoBase64]];
     }
 
     if ($category === 'futbol' && $kikinPhotoBase64) {
-        $parts[] = ['text' => "[IMAGE 3 - Third Person (Kikín Fonseca)]:\nThis is the reference photo of Kikín Fonseca. You MUST extract his face from this image and CLONE IT EXACTLY onto his character in the final generation. Do not beautify or synthesize his face. The identity must be 100% identical to this image. If his face doesn't match perfectly, the generation is a complete failure."];
+        $parts[] = ['text' => "[IMAGE 3 - Kikín Fonseca]:\nCRITICAL IDENTITY RULE: This is the exact reference photo of Kikín Fonseca. You MUST extract his exact facial identity and CLONE IT pixel-by-pixel onto his character. If you generate a generic person instead of THIS EXACT PERSON, the generation is a catastrophic failure."];
         $parts[] = ['inline_data' => ['mime_type' => 'image/png', 'data' => $kikinPhotoBase64]];
     }
 
