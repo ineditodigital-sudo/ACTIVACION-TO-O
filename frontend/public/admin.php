@@ -726,7 +726,9 @@ if (isset($input['p']) || $action === 'process') {
             . $characterCardsBlock;
     } else {
         // Restore textual description to anchor features organically
-        $finalPrompt .= $personDescription . "\n\n";
+        $finalPrompt .= 
+            "CRITICAL IDENTITY RULE: THIS IS A STRICT FACE SWAP FOR THE PERSON FROM IMAGE 1 (User). You MUST clone their exact facial identity, hair, and features from the reference image. Do not invent or hallucinate a new face. Failure to replicate their exact likeness is a catastrophic failure.\n\n" .
+            $personDescription . "\n\n";
     }
 
     $finalPrompt .=
@@ -798,7 +800,7 @@ if (isset($input['p']) || $action === 'process') {
             if ($gender === 'group') {
                 $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - PERSON {$pId} {$desc}]: This is the exact face of CHARACTER {$pId} from the group. CLONE THIS FACE WITH 100% ACCURACY for CHARACTER {$pId}. Do not beautify or alter any facial features. Keep their exact age, skin texture, and geometry. Do not apply this face to anyone else."];
             } else {
-                $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - {$desc}]: This is the face of the FIRST person (User). CLONE THIS FACE WITH 100% ACCURACY. Do not beautify, smooth, or alter ANY facial features. Keep their exact age, skin texture, nose shape, and eye shape. THIS IS THE ABSOLUTE HIGHEST PRIORITY."];
+                $parts[] = ['text' => "[IMAGE 1 FACE DETAIL - {$desc}]: CRITICAL IDENTITY RULE: This is the exact face of the FIRST person (User). THIS IS A STRICT FACE SWAP. CLONE THIS FACE WITH 100% ACCURACY pixel-by-pixel. Do not beautify, smooth, or alter ANY facial features. Keep their exact age, skin texture, nose shape, hair style, and eye shape. Failure to replicate their exact likeness is a catastrophic failure. THIS IS THE ABSOLUTE HIGHEST PRIORITY."];
             }
             
             $parts[] = ['inline_data' => ['mime_type' => 'image/jpeg', 'data' => $data]];
