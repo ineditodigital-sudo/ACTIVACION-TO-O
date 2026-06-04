@@ -1,4 +1,4 @@
-<?php
+﻿<?php
 /**
  * ACTIVACIÓN TOÑO MARTÍN DEL CAMPO - NANO BANANA 3.1
  * Lógica de 2 Etapas: Visión (Gemini 1.5 Flash) + Generación (Gemini 2.5 Flash Image)
@@ -699,10 +699,10 @@ if (isset($input['p']) || $action === 'process') {
     $finalPrompt .= "Integrate their bodies, lighting, and shadows perfectly so it looks like an unedited raw photo from a standard digital camera. No collage effect.\n\n"
         . "=== CHARACTER SPECIFIC RULES ===\n";
     if ($category === 'futbol') {
-        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair MUST be solid black. He must NEVER have white, gray, or brown hair. HE MUST NEVER HAVE TATTOOS. DO NOT transfer tattoos from IMAGE 1 to Toño.\n"
+        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair MUST be solid black. He must NEVER have white, gray, or brown hair. HE MUST NEVER HAVE TATTOOS. He is COMPLETELY CLEAN-SHAVEN. He MUST NEVER have a mustache, beard, or any facial hair. DO NOT transfer tattoos from IMAGE 1 to Toño.\n"
             . "- Kikín Fonseca (from IMAGE 3): Replicate his facial features and hair exactly. He has a very light stubble or is clean-shaven. He must NEVER have a thick, bushy, or frondose beard.\n\n";
     } else {
-        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair is solid black. HE MUST NEVER HAVE TATTOOS. DO NOT transfer tattoos from IMAGE 1 to Toño.\n\n";
+        $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair is solid black. HE MUST NEVER HAVE TATTOOS. He is COMPLETELY CLEAN-SHAVEN. He MUST NEVER have a mustache, beard, or any facial hair. DO NOT transfer tattoos from IMAGE 1 to Toño.\n\n";
     }
     
     $finalPrompt .= "=== GROUP DYNAMICS ===\n";
