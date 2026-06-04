@@ -561,8 +561,8 @@ if (isset($input['p']) || $action === 'process') {
     //  MAPAS DE ESTILO DE CAMPAÑA - TOÑO MARTÍN DEL CAMPO
     // ═══════════════════════════════════════════════════════════════
     if ($category === 'futbol') {
-        $scenarioDesc = 'a professional sports commentator cabin with a desk and microphones in a stadium, blurred soccer pitch with supporter crowd in the background during a Mexico soccer match. ABSOLUTELY NO LOGOS ALLOWED. Do NOT generate any broadcasting network logos, TV station logos, or sponsor logos anywhere.';
-        $outfitDesc = 'official Mexican national soccer team jerseys (green with white and red accents) or professional commentators blazers and suits. CLOTHING MUST BE 100% BLANK WITH NO LOGOS. Do NOT generate Nike, Adidas, Puma, or any sports brand logos on the clothing. No sponsor logos on the clothing.';
+        $scenarioDesc = 'a professional sports commentator cabin with a desk and microphones in a stadium, blurred soccer pitch with supporter crowd in the background during a Mexico soccer match. Lighting must be FLAT and NATURAL broadcasting light. Do NOT use dramatic shadows, HDR, or cinematic lighting. ABSOLUTELY NO LOGOS ALLOWED. Do NOT generate any broadcasting network logos, TV station logos, or sponsor logos anywhere.';
+        $outfitDesc = 'generic plain green blank t-shirts or professional commentators blazers and suits. CLOTHING MUST BE 100% BLANK WITH NO LOGOS. Do NOT generate Nike, Adidas, Puma, or any sports brand logos on the clothing. No sponsor logos on the clothing.';
         $interactionDesc = 'The user, Toño Martín del Campo, and Kikín Fonseca are sports commentators looking away from the camera, looking towards the soccer match on the pitch, reacting with intense excitement, cheering, and celebrating, gesturing dynamically. They are NOT looking at the camera.';
     } else {
         $scenarioMap = [
@@ -676,23 +676,27 @@ if (isset($input['p']) || $action === 'process') {
         if ($gender === 'group') {
             $finalPrompt .= "Take EXACTLY {$numPeopleText} people from IMAGE 1, the person from IMAGE 2 (Toño Martín del Campo), and the person from IMAGE 3 (Kikín Fonseca). Put them interacting organically together as a team of commentators in a broadcast cabin for a soccer match.\n"
                 . "CRITICAL RULE: You MUST generate EXACTLY " . ($numPeople + 2) . " main characters in the foreground. DO NOT GENERATE ANY EXTRA MAIN CHARACTERS.\n"
+                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) MUST ALWAYS BE PRESENT and clearly visible in the center of the action. If Toño is missing, the generation is a complete failure.\n"
                 . "CRITICAL RULE: IMAGE 1 contains multiple different people. You must include ALL of them as separate individuals. Do not merge or fuse them. Maintain character consistency for everyone (User group, Toño, and Kikín).\n";
         } else {
             $finalPrompt .= "Take the person from IMAGE 1, the person from IMAGE 2 (Toño Martín del Campo), and the person from IMAGE 3 (Kikín Fonseca). Put them interacting organically together as a team of commentators in a broadcast cabin for a soccer match.\n"
                 . "CRITICAL RULE: You MUST generate EXACTLY THREE (3) distinct, separate people. DO NOT merge, fuse, or combine characters. Each person must have their own separate body.\n"
-                . "CRITICAL RULE: Maintain ABSOLUTE 1:1 PHOTOREALISTIC character consistency for all three people. Their facial structure, eye shape, nose, and jawline must be IDENTICAL to the reference photos. Do not alter their faces in any way.\n";
+                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) MUST ALWAYS BE PRESENT and clearly visible. If Toño is missing, the generation is a complete failure.\n"
+                . "CRITICAL RULE: Maintain ABSOLUTE EXTREME 1:1 PHOTOREALISTIC character consistency for all three people. Your ONLY job is to copy and paste the EXACT faces from the reference images onto the bodies. Do NOT beautify, alter, or synthesize the faces. The identity must match 100%.\n";
         }
     } else {
         if ($gender === 'group') {
             $finalPrompt .= "Take EXACTLY {$numPeopleText} people from IMAGE 1 and the person from IMAGE 2 (Toño). Put them interacting organically together for a cohesive, seamless photograph.\n"
                 . "CRITICAL RULE: You MUST generate EXACTLY " . ($numPeople + 1) . " main characters in the foreground. DO NOT GENERATE ANY EXTRA MAIN CHARACTERS.\n"
+                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) MUST ALWAYS BE PRESENT and clearly visible. If Toño is missing, the generation is a complete failure.\n"
                 . "CRITICAL RULE: IMAGE 1 contains multiple different people. You must include ALL of them as separate individuals. Do not merge or fuse them. Maintain character consistency for everyone.\n";
         } else {
             $finalPrompt .= "Take the person from IMAGE 1 and the person from IMAGE 2 (Toño). Put them interacting organically together for a cohesive, seamless photograph.\n"
-                . "CRITICAL RULE: Maintain ABSOLUTE 1:1 PHOTOREALISTIC character consistency for both people. Their facial structure, eye shape, nose, and jawline must be IDENTICAL to the reference photos. Do not alter their faces in any way.\n";
+                . "CRITICAL RULE: The person from IMAGE 2 (Toño Martín del Campo) MUST ALWAYS BE PRESENT and clearly visible. If Toño is missing, the generation is a complete failure.\n"
+                . "CRITICAL RULE: Maintain ABSOLUTE EXTREME 1:1 PHOTOREALISTIC character consistency for both people. Your ONLY job is to copy and paste the EXACT faces from the reference images onto the bodies. Do NOT beautify, alter, or synthesize the faces. The identity must match 100%.\n";
         }
     }
-    $finalPrompt .= "Integrate their bodies, lighting, and shadows perfectly so it looks like a real, single photo. No collage effect.\n\n"
+    $finalPrompt .= "Integrate their bodies, lighting, and shadows perfectly so it looks like an unedited raw photo from a standard digital camera. No collage effect.\n\n"
         . "=== CHARACTER SPECIFIC RULES ===\n";
     if ($category === 'futbol') {
         $finalPrompt .= "- Toño Martín del Campo (from IMAGE 2): Replicate his facial features and hair exactly. His hair MUST be solid black. He must NEVER have white, gray, or brown hair. HE MUST NEVER HAVE TATTOOS. DO NOT transfer tattoos from IMAGE 1 to Toño.\n"
